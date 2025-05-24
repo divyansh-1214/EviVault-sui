@@ -37,9 +37,9 @@ function App() {
     <div>
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route
-          path="/evidence"
+          path="/"
           element={
             <>
               <h1>Evidence Management System</h1>
