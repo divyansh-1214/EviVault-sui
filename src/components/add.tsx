@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useWalletKit } from '@mysten/wallet-kit';
 import { SuiClient, getFullnodeUrl } from '@mysten/sui.js/client';
 import { TransactionBlock } from '@mysten/sui.js/transactions';
-import { fromB64 } from '@mysten/sui.js/utils';
 
 const PACKAGE_ID = '0x54419cdac955854ee74e49e1dd23ace8ffd736e1440c3dfed0e99166665123d8';
 const SYSTEM_STATE_ID = '0xf44820d3eb6dfe52e563b70861083fadee7f6d9bd3be630ab40297ff953a9a35';
