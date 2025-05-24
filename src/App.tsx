@@ -1,4 +1,3 @@
-import './App.css'
 // App.jsx or index.jsx or wherever your top-level layout is defined
 import { WalletKitProvider } from '@mysten/wallet-kit';
 import { SuiClientProvider } from '@mysten/dapp-kit';
