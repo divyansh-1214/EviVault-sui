@@ -11,7 +11,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-
+import Home from './components/home';
+import Nav from './components/Nav';
 const queryClient = new QueryClient();
 
 const networks = {
@@ -20,39 +21,45 @@ const networks = {
   mainnet: { url: getFullnodeUrl('mainnet') }
 };
 
-function Home() {
-  return <h2>Home Page</h2>;
-}
 
 function App() {
   return (
-    <div>
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route
-          path="/"
-          element={
-            <>
-              <h1>Evidence Management System</h1>
+    <div className="min-h-screen bg-gray-900">
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/get"
+            element={
               <QueryClientProvider client={queryClient}>
                 <SuiClientProvider networks={networks} defaultNetwork="testnet">
                   <WalletKitProvider>
-                    <ConnectWallet />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-                      <AddEvidence />
+                    <div className="container mx-auto px-4 py-8">
                       <GetEvidence />
                     </div>
                   </WalletKitProvider>
                 </SuiClientProvider>
               </QueryClientProvider>
-            </>
-          }
-        />
-      </Routes>
-    </Router>
-    </div> 
-
+            }
+          />
+          <Route
+            path="/add"
+            element={
+              <QueryClientProvider client={queryClient}>
+                <SuiClientProvider networks={networks} defaultNetwork="testnet">
+                  <WalletKitProvider>
+                    <div className="container mx-auto px-4 py-8">
+                      <AddEvidence />
+                    </div>
+                  </WalletKitProvider>
+                </SuiClientProvider>
+              </QueryClientProvider>
+            }
+          />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

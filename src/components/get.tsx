@@ -155,77 +155,108 @@ export default function GetEvidence() {
     };
 
     return (
-        <div className="p-4">
-            <h2 className="text-xl font-semibold mb-4">Get Evidence Details</h2>
+        <div className="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-white mb-6">Evidence Retrieval</h2>
+            
             {maxEvidence !== null && (
-                <div className="mb-4 p-3 bg-blue-100 text-blue-700 rounded">
-                    Current max evidence ID: {maxEvidence}<br />
-                    Next evidence ID will be: {maxEvidence + 1}
+                <div className="mb-6 p-4 bg-blue-900/50 text-blue-200 rounded-lg border border-blue-700">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-sm font-medium">Current max evidence ID</p>
+                            <p className="text-2xl font-bold">{maxEvidence}</p>
+                        </div>
+                        <div>
+                            <p className="text-sm font-medium">Next evidence ID</p>
+                            <p className="text-2xl font-bold">{maxEvidence + 1}</p>
+                        </div>
+                    </div>
                 </div>
             )}
-            <div className="mb-4">
-                <input
-                    type="text"
-                    placeholder="Enter Evidence ID"
-                    value={evidenceId}
-                    onChange={(e) => setEvidenceId(e.target.value)}
-                    className="border p-2 w-full mb-2 rounded"
-                />
-                <button
-                    onClick={fetchEvidence}
-                    disabled={loading}
-                    className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                >
-                    {loading ? 'Loading...' : 'Fetch Evidence'}
-                </button>
+
+            <div className="mb-6">
+                <label htmlFor="evidenceId" className="block text-sm font-medium text-gray-300 mb-2">
+                    Evidence ID
+                </label>
+                <div className="flex gap-3">
+                    <input
+                        id="evidenceId"
+                        type="text"
+                        placeholder="Enter Evidence ID"
+                        value={evidenceId}
+                        onChange={(e) => setEvidenceId(e.target.value)}
+                        className="flex-1 bg-gray-700 border border-gray-600 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                    <button
+                        onClick={fetchEvidence}
+                        disabled={loading}
+                        className={`px-6 py-2 bg-blue-600 text-white rounded-lg font-medium transition-colors
+                            ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800'}`}
+                    >
+                        {loading ? (
+                            <span className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                                Loading
+                            </span>
+                        ) : 'Fetch Evidence'}
+                    </button>
+                </div>
             </div>
 
             {error && (
-                <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-                    {error}
+                <div className="mb-6 p-4 bg-red-900/50 text-red-200 rounded-lg border border-red-700">
+                    <p className="font-medium">Error</p>
+                    <p className="text-sm">{error}</p>
                 </div>
             )}
 
             {evidence && (
-                <div className="bg-gray-50 p-4 rounded shadow">
-                    <h3 className="text-lg font-semibold mb-3">Evidence Information</h3>
-                    <div className="space-y-4">
-                        <div>
-                            <p className="font-medium">Evidence ID:</p>
-                            <p>{evidence.details.evidence_id}</p>
+                <div className="bg-gray-700 rounded-lg p-6 space-y-6">
+                    <h3 className="text-xl font-bold text-white mb-4">Evidence Information</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium text-gray-400">Evidence ID</p>
+                            <p className="text-lg text-white">{evidence.details.evidence_id}</p>
                         </div>
-                        <div>
-                            <p className="font-medium">Case Number:</p>
-                            <p>{evidence.details.case_no}</p>
+                        
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium text-gray-400">Case Number</p>
+                            <p className="text-lg text-white">{evidence.details.case_no}</p>
                         </div>
-                        <div>
-                            <p className="font-medium">FIR Number:</p>
-                            <p>{evidence.details.fir_no}</p>
+                        
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium text-gray-400">FIR Number</p>
+                            <p className="text-lg text-white">{evidence.details.fir_no}</p>
                         </div>
-                        <div>
-                            <p className="font-medium">IPFS Hash:</p>
-                            <p className="break-all">{decodeBytes(evidence.details.ipfs)}</p>
+                        
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium text-gray-400">Date</p>
+                            <p className="text-lg text-white">{evidence.details.date}</p>
                         </div>
-                        <div>
-                            <p className="font-medium">Content:</p>
-                            <p className="break-all">{decodeBytes(evidence.details.content)}</p>
+                        
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium text-gray-400">Location</p>
+                            <p className="text-lg text-white">
+                                {evidence.details.latitude}, {evidence.details.longitude}
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-medium">Access:</p>
-                            <p>{evidence.details.access ? 'Enabled' : 'Disabled'}</p>
+                        
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium text-gray-400">Access Status</p>
+                            <p className="text-lg">
+                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${evidence.details.access ? 'bg-green-900/50 text-green-200' : 'bg-red-900/50 text-red-200'}`}>
+                                    {evidence.details.access ? 'Accessible' : 'Restricted'}
+                                </span>
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-medium">Head Address:</p>
-                            <p className="break-all">{evidence.details.head}</p>
-                        </div>
-                        <div>
-                            <p className="font-medium">Location:</p>
-                            <p>Latitude: {evidence.details.latitude}, Longitude: {evidence.details.longitude}</p>
-                        </div>
-                        <div>
-                            <p className="font-medium">Date:</p>
-                            <p>{new Date(Number(evidence.details.date) * 1000).toLocaleString()}</p>
-                        </div>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-gray-600">
+                        <p className="text-sm font-medium text-gray-400 mb-2">Evidence Header</p>
+                        <p className="text-lg text-white">{evidence.details.head}</p>
                     </div>
                 </div>
             )}
