@@ -1,7 +1,7 @@
 import './App.css'
 // App.jsx or index.jsx or wherever your top-level layout is defined
 import { WalletKitProvider } from '@mysten/wallet-kit';
-import { SuiClientProvider} from '@mysten/dapp-kit';
+import { SuiClientProvider } from '@mysten/dapp-kit';
 import ConnectWallet from './components/test';
 import GetEvidence from './components/get';
 import AddEvidence from './components/add';
@@ -25,8 +25,6 @@ const networks = {
 function Home() {
   return <h2>Home Page</h2>;
 }
-
-
 
 function App() {
   return (
