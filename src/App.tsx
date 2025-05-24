@@ -1,9 +1,8 @@
 import './App.css'
 // App.jsx or index.jsx or wherever your top-level layout is defined
 import { WalletKitProvider } from '@mysten/wallet-kit';
-import { SuiClientProvider, createNetworkConfig } from '@mysten/dapp-kit';
+import { SuiClientProvider } from '@mysten/dapp-kit';
 import ConnectWallet from './components/test';
-import CreatePatientButton from './components/create';
 import GetEvidence from './components/get';
 import AddEvidence from './components/add';
 import { getFullnodeUrl } from '@mysten/sui.js/client';
